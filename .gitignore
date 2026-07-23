@@ -1,0 +1,7 @@
+out/
+build/
+*.tar
+*.img
+.requirements
+AIK-Linux/split_img/
+AIK-Linux/ramdisk/
