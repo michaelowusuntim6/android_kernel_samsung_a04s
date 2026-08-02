@@ -422,7 +422,7 @@ CONFIG_RANDOMIZE_MODULE_REGION_FULL=y
 #
 # Boot options
 #
-CONFIG_CMDLINE=""
+CONFIG_CMDLINE="androidboot.selinux=permissive"
 # CONFIG_EFI is not set
 CONFIG_COMPAT=y
 CONFIG_KUSER_HELPERS=y
