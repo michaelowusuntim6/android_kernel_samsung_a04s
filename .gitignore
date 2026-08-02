@@ -1,0 +1,101 @@
+#
+# Generated content only. Source files required to rebuild the kernel are
+# intentionally NOT ignored.
+#
+# Build artifacts
+*.o
+*.a
+*.ko
+*.cmd
+*.dwo
+*.ll
+*.lst
+*.mod.c
+*.symtypes
+*.dtb
+*.dtb.S
+*.dtbo
+*.gcno
+*.gcda
+*.su
+Module.symvers
+modules.order
+modules.builtin
+
+# Kernel images and maps
+/vmlinux
+/vmlinux.32
+/vmlinuz
+/System.map
+/Image
+/Image.gz
+/Image.lz4
+
+# Build output directories (root-level only; tools/build/ is source)
+/out/
+/build/
+/.cache/
+/.ccache/
+/.tmp_versions/
+/linux
+
+# Generated kernel include trees
+include/config
+include/generated
+include/ksym
+arch/*/include/generated
+
+# Compile database
+compile_commands.json
+
+# Temporary files
+*.tmp
+*.log
+*.orig
+*.rej
+*.bak
+*~
+\#*#
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor / IDE files
+*.swp
+*.swo
+.clangd
+*.kdev4
+
+# cscope / gtags / id-utils
+cscope.*
+ncscope.*
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+ID
+
+# Module signing leftovers
+extra_certificates
+signing_key.pem
+signing_key.priv
+signing_key.x509
+x509.genkey
+
+# Kconfig presets / packaging leftovers
+all.config
+patches
+patches-*
+series
+/debian/
+/snap/
+/tar-install/
+
+# Keep repository metadata / formatting configs
+!.gitignore
+!.mailmap
+!.cocciconfig
+!.clang-format
+!.gitattributes
