@@ -11,6 +11,7 @@ import subprocess
 import re
 import os
 import struct
+import shutil
 from Utils import Utils
 from collections import OrderedDict
 from binascii import unhexlify
@@ -69,13 +70,19 @@ class ELF:
     def __init__(self, elf_file, readelf_path="readelf"):
         self.__elf_file = elf_file
         self.utils = Utils()
-        self.__readelf_path = readelf_path
+
+        # Check if passed readelf_path exists; fallback to PATH if not found
+        if not os.path.exists(readelf_path):
+            self.__readelf_path = shutil.which("llvm-readelf") or shutil.which("readelf") or "readelf"
+        else:
+            self.__readelf_path = readelf_path
+
         self.__sections = OrderedDict()
         self.__symbols = OrderedDict()
         self.__relocs = list()
-        self.__re_hexdecimal = "\s*[0-9A-Fa-f]+\s*"
-        self.__re_sec_name = "\s*[._a-zA-Z]+\s*"
-        self.__re_type = "\s*[A-Z]+\s*"
+        self.__re_hexdecimal = r"\s*[0-9A-Fa-f]+\s*"
+        self.__re_sec_name = r"\s*[._a-zA-Z]+\s*"
+        self.__re_type = r"\s*[A-Z]+\s*"
 
     def __readelf_raw(self, options):
         """
