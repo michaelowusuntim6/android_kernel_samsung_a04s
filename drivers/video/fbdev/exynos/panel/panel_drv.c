@@ -394,20 +394,24 @@ int __set_panel_power(struct panel_device *panel, int power)
 	if (power == PANEL_POWER_ON) {
 		run_list(panel->dev, "panel_power_enable");
 
-		if (get_regulator_use_count(NULL, "gpio_lcd_bl_en") >= 2) {
+		if (get_regulator_use_count(NULL, "lcd_bl_en") >= 2)
 			panel_info("%s PANEL_I2C_INIT_SEQ SKIP\n", __func__);
-		} else {
+		else
 			panel_do_seqtbl_by_index_nolock(panel, PANEL_I2C_INIT_SEQ);
-			panel_do_seqtbl_by_index_nolock(panel, PANEL_I2C_DUMP_SEQ);
-		}
+
+		panel_do_seqtbl_by_index_nolock(panel, PANEL_I2C_DUMP_SEQ);
+
+		run_list(panel->dev, "panel_power_enable_2");
 
 	} else {
 		run_list(panel->dev, "panel_reset_disable");
 
-		if (get_regulator_use_count(NULL, "gpio_lcd_bl_en") >= 2)
+		if (get_regulator_use_count(NULL, "lcd_bl_en") >= 2)
 			panel_info("%s PANEL_I2C_EXIT_SEQ SKIP\n", __func__);
 		else
 			panel_do_seqtbl_by_index_nolock(panel, PANEL_I2C_EXIT_SEQ);
+
+		panel_do_seqtbl_by_index_nolock(panel, PANEL_I2C_DUMP_SEQ);
 
 		run_list(panel->dev, "panel_power_disable");
 	}
